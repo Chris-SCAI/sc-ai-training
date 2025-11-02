@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>S&C AI Training - Guide des Outils IA</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a1628 0%, #1a2940 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.3;
+        }
+
+        .circle {
+            position: absolute;
+            border: 2px solid #4dd0e1;
+            border-radius: 50%;
+            animation: pulse 3s infinite;
+        }
+
+        .circle1 {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .circle2 {
+            width: 200px;
+            height: 200px;
+            top: 60%;
+            right: 15%;
+            animation-delay: 1s;
+        }
+
+        .circle3 {
+            width: 150px;
+            height: 150px;
+            bottom: 10%;
+            left: 50%;
+            animation-delay: 2s;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.3;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.6;
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(26, 41, 64, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 32px rgba(77, 208, 225, 0.2);
+            border: 1px solid rgba(77, 208, 225, 0.3);
+        }
+
+        .logo-container {
+            margin-bottom: 20px;
+        }
+
+        .logo-video {
+            max-width: 400px;
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(77, 208, 225, 0.4);
+        }
+
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #ffffff, #4dd0e1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            color: #4dd0e1;
+            font-weight: 300;
+        }
+
+        /* Introduction */
+        .intro {
+            background: rgba(26, 41, 64, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            border-left: 4px solid #4dd0e1;
+            line-height: 1.8;
+        }
+
+        .intro p {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+
+        /* Tools Grid */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .tool-card {
+            background: rgba(26, 41, 64, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.4s ease;
+            border: 2px solid rgba(77, 208, 225, 0.2);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(77, 208, 225, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .tool-card:hover::before {
+            left: 100%;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 40px rgba(77, 208, 225, 0.4);
+            border-color: #4dd0e1;
+        }
+
+        .tool-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 15px;
+        }
+
+        .tool-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            background: linear-gradient(135deg, rgba(77, 208, 225, 0.2), rgba(77, 208, 225, 0.05));
+            border: 2px solid rgba(77, 208, 225, 0.3);
+            flex-shrink: 0;
+        }
+
+        .tool-title {
+            font-size: 1.6em;
+            font-weight: 600;
+            color: #4dd0e1;
+        }
+
+        .tool-description {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            color: #e0e0e0;
+        }
+
+        .use-cases {
+            background: rgba(10, 22, 40, 0.5);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 3px solid #4dd0e1;
+        }
+
+        .use-cases h3 {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            color: #4dd0e1;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .use-cases ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .use-cases li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .use-cases li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #4dd0e1;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: rgba(26, 41, 64, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            margin-top: 40px;
+        }
+
+        footer p {
+            font-size: 1.1em;
+            color: #4dd0e1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            header {
+                padding: 20px 15px;
+                margin-bottom: 20px;
+            }
+
+            .logo-video {
+                max-width: 100%;
+                width: 90%;
+            }
+
+            h1 {
+                font-size: 1.8em;
+                line-height: 1.3;
+            }
+
+            .subtitle {
+                font-size: 1em;
+                line-height: 1.4;
+                padding: 0 10px;
+            }
+
+            .intro {
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+
+            .intro p {
+                font-size: 1em;
+            }
+
+            .tools-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .tool-card {
+                padding: 20px;
+            }
+
+            .tool-header {
+                flex-direction: row;
+                align-items: center;
+                gap: 12px;
+            }
+
+            .tool-logo {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5em;
+            }
+
+            .tool-title {
+                font-size: 1.3em;
+            }
+
+            .tool-description {
+                font-size: 0.95em;
+            }
+
+            .use-cases {
+                padding: 15px;
+            }
+
+            .use-cases h3 {
+                font-size: 1em;
+            }
+
+            .use-cases li {
+                font-size: 0.9em;
+                padding: 6px 0;
+            }
+
+            footer {
+                padding: 20px 15px;
+            }
+
+            footer p {
+                font-size: 1em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .subtitle {
+                font-size: 0.9em;
+            }
+
+            .logo-video {
+                max-width: 100%;
+            }
+
+            .tool-title {
+                font-size: 1.2em;
+            }
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tool-card {
+            animation: fadeInUp 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .tool-card:nth-child(1) { animation-delay: 0.1s; }
+        .tool-card:nth-child(2) { animation-delay: 0.2s; }
+        .tool-card:nth-child(3) { animation-delay: 0.3s; }
+        .tool-card:nth-child(4) { animation-delay: 0.4s; }
+        .tool-card:nth-child(5) { animation-delay: 0.5s; }
+        .tool-card:nth-child(6) { animation-delay: 0.6s; }
+        .tool-card:nth-child(7) { animation-delay: 0.7s; }
+        .tool-card:nth-child(8) { animation-delay: 0.8s; }
+        .tool-card:nth-child(9) { animation-delay: 0.9s; }
+        .tool-card:nth-child(10) { animation-delay: 1s; }
+        .tool-card:nth-child(11) { animation-delay: 1.1s; }
+        .tool-card:nth-child(12) { animation-delay: 1.2s; }
+    </style>
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="background-animation">
+        <div class="circle circle1"></div>
+        <div class="circle circle2"></div>
+        <div class="circle circle3"></div>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo-container">
+                <video class="logo-video" autoplay loop muted playsinline webkit-playsinline x-webkit-airplay="allow" preload="auto">
+                    <source src="sc_ai_training_logo.mp4" type="video/mp4">
+                    Votre navigateur ne supporte pas la lecture de vidéos HTML5.
+                </video>
+            </div>
+            <h1>Guide des outils d'intelligence artificielle générative</h1>
+            <p class="subtitle">S&C AI TRAINING vous présente les cas d'usages pratico-pratiques des principaux outils IAG du moment</p>
+        </header>
+
+        <!-- Introduction -->
+        <div class="intro">
+            <p>👋 <strong>Bienvenue dans votre guide complet des outils d'IA !</strong></p>
+            <p>L'intelligence artificielle transforme notre façon de travailler, créer et innover. Ce guide vous présente les outils les plus performants du marché avec leurs cas d'usage concrets pour vous aider à choisir la solution adaptée à vos besoins.</p>
+            <p>🎯 Chaque outil est présenté avec ses points forts et des exemples d'utilisation pratico-pratiques.</p>
+        </div>
+
+        <!-- Tools Grid -->
+        <div class="tools-grid">
+            <!-- ChatGPT -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <div class="tool-logo" style="background: linear-gradient(135deg, #10a37f, #1a7f64);">
+                        🤖
+                    </div>
+                    <div class="tool-title">ChatGPT</div>
+                </div>
+                <div class="tool-description">
+                    Assistant conversationnel d'OpenAI : votre allié pour travailler plus efficacement, apprendre plus vite et booster votre créativité. Accessible à tous, il s'adapte à vos besoins et vous accompagne au quotidien.
+                </div>
+                <div class="use-cases">
+                    <h3>💡 Quelques façons de l'utiliser</h3>
+                    <ul>
+                        <li><strong>Créez des contenus impactants :</strong> rédigez vos emails, articles ou posts en un clin d'œil.</li>
+                        <li><strong>Simplifiez le code :</strong> trouvez la cause d'une erreur ou comprenez un concept technique sans prise de tête.</li>
+                        <li><strong>Débloquez vos idées :</strong> lancez un brainstorming inspiré pour préparer vos projets ou vos présentations.</li>
+                        <li><strong>Apprenez autrement :</strong> prenez goût à la compréhension de sujets techniques ou complexes expliqués simplement.</li>
+                        <li><strong>Améliorez votre communication :</strong> résumez, développez, reformulez, traduisez et adaptez vos messages à votre audience.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Claude -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <div class="tool-logo" style="background: linear-gradient(135deg, #cc9b7a, #8b6f47);">
+                        🧠
+                    </div>
+                    <div class="tool-title">Claude</div>
+                </div>
+                <div class="tool-description">
+                    L'intelligence artificielle d'Anthropic, c'est un peu comme un partenaire de confiance : rigoureux, fin analyste et toujours attentif à la sécurité des données. Elle excelle quand il s'agit de traiter des sujets complexes avec finesse et de garder le fil sur de longues analyses.
+                </div>
+                <div class="use-cases">
+                    <h3>💡 Quelques usages clairs et concrets</h3>
+                    <ul>
+                        <li><strong>Analyser des documents volumineux :</strong> transformer un rapport de 80 pages en une synthèse claire et exploitable.</li>
+                        <li><strong>Explorer des sources académiques :</strong> comparer, critiquer et en tirer l'essentiel pour vos travaux.</li>
+                        <li><strong>Rédiger comme un pro :</strong> que ce soit un rapport, une note de synthèse ou un mémo stratégique, elle vous aide à structurer et formuler vos idées avec impact.</li>
+                        <li><strong>Valider du code :</strong> repérer les failles, améliorer la qualité et renforcer la sécurité de vos développements.</li>
+                        <li><strong>Réfléchir à l'éthique :</strong> poser les bonnes questions sur les enjeux moraux des décisions ou projets que vous portez.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Gemini -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <div class="tool-logo" style="background: linear-gradient(135deg, #4285f4, #34a853);">
+                        ✨
+                    </div>
+                    <div class="tool-title">Gemini</div>
+                </div>
+                <div class="tool-description">
+                    L'intelligence artificielle multimodale de Google, c'est l'assistant nouvelle génération directement relié à tout l'univers Google. Elle comprend les images, les vidéos et les mots… et vous aide à trouver, organiser et analyser l'information en quelques secondes.
+                </div>
+                <div class="use-cases">
+                    <h3>💡 Voici quelques applications très concrètes</h3>
+                    <ul>
+                        <li><strong>Analyse d'images :</strong> repérez automatiquement les objets, les textes ou les détails importants d'une photo.</li>
+                        <li><strong>Recherche web en temps réel :</strong> accédez aux informations les plus récentes sans quitter votre interface.</li>
+                        <li><strong>Intégration totale :</strong> connectez vos outils du quotidien – Gmail, Docs, Drive, Calendar – pour gagner un temps précieux.</li>
+                        <li><strong>Planification de voyages :</strong> créez des itinéraires intelligents avec Google Maps.</li>
+                        <li><strong>Analyse de vidéos :</strong> tirez l'essentiel d'une vidéo YouTube en un clin d'œil.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Copilot -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <div class="tool-logo" style="background: linear-gradient(135deg, #0078d4, #005a9e);">
+                        💼
+                    </div>
+                    <div class="tool-title">Copilot</div>
+                </div>
+                <div class="tool-description">
+                    L'assistant IA de Microsoft, intégré directement à Windows et Office 365, est là pour vous simplifier la vie professionnelle et booster votre efficacité jour après jour.
+                </div>
+                <div class="use-cases">
+                    <h3>💡 Voici ce qu'il peut faire pour vous</h3>
+                    <ul>
+                        <li><strong>Gagner du temps sur vos documents :</strong> il rédige vos textes dans Word et analyse vos tableaux dans Excel.</li>
+                        <li><strong>Alléger votre boîte mail :</strong> il résume vos échanges dans Outlook pour aller droit à l'essentiel.</li>
+                        <li><strong>Doper vos présentations :</strong> il crée automatiquement des slides percutants dans PowerPoint.</li>
+                        <li><strong>Trouver des infos fiables :</strong> il recherche sur le web et cite ses sources pour vous.</li>
+                        <li><strong>Simplifier vos tâches :</strong> il automatise les actions répétitives dans Windows, comme un véritable assistant personnel.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Mistral -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <div class="tool-logo" style="background: linear-gradient(135deg, #f2a900, #d9880a);">
+                        🇫🇷
+                    </div>
+                    <div class="tool-title">Mistral AI</div>
+                </div>
+                <div class="tool-description">
+                    L'intelligence artificielle à la française, ouverte, performante et responsable.
+Découvrez une IA conçue pour allier puissance, créativité et respect de la souveraineté européenne.
+                </div>
+                <div class="use-cases">
+                    <h3>💡 Une IA qui parle votre langue</h3>
+                    <ul>
+                        <li><strong>Une IA qui parle votre langue :</strong> rédigez en français avec une qualité native et un style naturel.</li>
+                        <li><strong>Données protégées, confiance assurée :</strong> vos informations restent en Europe, dans le strict respect des règles RGPD et de l'AI Act.</li>
+                        <li><strong>Boostez vos projets tech :</strong> générez du code fiable, rapide et adapté à vos besoins de développement.</li>
+                        <li><strong>Des solutions sur mesure :</strong> adaptez les modèles Mistral à votre métier, vos outils et vos ambitions.</li>
+                        <li><strong>Traduisez sans perdre l'essence :</strong> passez du français à l'anglais (et inversement) tout en conservant les nuances culturelles.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Perplexity -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <div class="tool-logo" style="background: linear-gradient(135deg, #20808d, #165c66);">
+                        🔍
+                    </div>
+                    <div class="tool-title">Perplexity</div>
+                </div>
+                <div class="tool-description">
+                    Bien plus qu'un simple moteur de recherche : c'est une IA conversationnelle qui échange avec vous comme un vrai partenaire de réflexion, tout en citant des sources fiables et vérifiables.
+Résultat ? Vous ne cherchez plus l'information… vous la comprenez, l'explorez et l'utilisez.
+                </div>
+                <div class="use-cases">
+                    <h3>💡 Quelques usages concrets pour démarrer</h3>
+                    <ul>
+                        <li><strong>Recherche académique :</strong> obtenez des réponses claires, appuyées sur des références précises.</li>
+                        <li><strong>Veille informationnelle :</strong> suivez les nouveautés en temps réel, toujours sourcées.</li>
+                        <li><strong>Comparaison de produits :</strong> analysez les options avec des données objectives et justifiées.</li>
+                        <li><strong>Fact-checking :</strong> vérifiez rapidement ce qui est vrai et ce qui ne l'est pas.</li>
+                        <li><strong>Exploration de sujets complexes :</strong> découvrez, pas à pas, de nouveaux domaines expliqués de façon simple.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- NotebookLM -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <div class="tool-logo" style="background: linear-gradient(135deg, #ea4335, #fbbc04);">
+                        📚
+                    </div>
+                    <div class="tool-title">NotebookLM</div>
+                </div>
+                <div class="tool-description">
+                    Ton coach numérique pour comprendre, synthétiser et exploiter tes propres documents.
+Imaginé par Google, il t'aide à transformer ton contenu en véritable ressource d'apprentissage et d'action.
+                </div>
+                <div class="use-cases">
+                    <h3>💡 Quelques façons malignes de l'utiliser</h3>
+                    <ul>
+                        <li><strong>Gagner du temps :</strong> résume en un clic tes PDFs, articles et notes.</li>
+                        <li><strong>Mieux apprendre :</strong> crée des fiches de cours claires à partir de ton contenu.</li>
+                        <li><strong>Explorer efficacement :</strong> pose des questions directement à ta bibliothèque de documents.</li>
+                        <li><strong>Piloter tes projets :</strong> structure et organise toute ta documentation technique.</li>
+                        <li><strong>Partager autrement :</strong> transforme tes textes en podcasts d'explication grâce à l'IA.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Mapify -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <div class="tool-logo" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                        🗺️
+                    </div>
+                    <div class="tool-title">Mapify</div>
+                </div>
+                <div class="tool-description">
+                    Ton allié pour penser plus vite et mieux ! Cette intelligence artificielle transforme tes notes, tes documents, ou même tes vidéos en cartes mentales claires et visuelles. Idéal pour apprendre, structurer et mémoriser facilement l'essentiel.
+                </div>
+                <div class="use-cases">
+                    <h3>💡 Quelques idées d'utilisation</h3>
+                    <ul>
+                        <li><strong>Prise de notes visuelles :</strong> transforme tes cours ou réunions en schémas clairs et faciles à relire.</li>
+                        <li><strong>Brainstorming structuré :</strong> fais jaillir tes idées… puis organise-les d'un coup d'œil.</li>
+                        <li><strong>Synthèse de lectures :</strong> comprends et retiens les points clés d'un livre ou d'un article sans te perdre.</li>
+                        <li><strong>Planification de projet :</strong> découpe un objectif complexe en étapes simples et visuelles.</li>
+                        <li><strong>Présentation d'idées :</strong> surprends ton audience avec des visuels percutants et clairs.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Napkin -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <div class="tool-logo" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+                        🎨
+                    </div>
+                    <div class="tool-title">Napkin AI</div>
+                </div>
+                <div class="tool-description">
+                    En un clin d'œil, transformez vos mots en images percutantes. Napkin AI génère instantanément des illustrations, diagrammes et graphiques professionnels à partir de votre texte. Fini les heures passées à chercher le bon visuel : un clic suffit pour créer l'impact.
+                </div>
+                <div class="use-cases">
+                    <h3>💡 Des usages concrets pour booster votre quotidien professionnel</h3>
+                    <ul>
+                        <li><strong>Présentations :</strong> donnez du relief à vos supports avec des visuels clairs et modernes.</li>
+                        <li><strong>Infographies :</strong> mettez en scène vos chiffres et statistiques d'un coup d'œil.</li>
+                        <li><strong>Diagrammes :</strong> structurez vos idées, vos processus ou vos organigrammes.</li>
+                        <li><strong>Réseaux sociaux :</strong> créez des posts visuels attractifs en quelques secondes.</li>
+                        <li><strong>Guides et tutoriels :</strong> facilitez la compréhension avec des schémas explicatifs.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Gamma -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <div class="tool-logo" style="background: linear-gradient(135deg, #fa709a, #fee140);">
+                        📊
+                    </div>
+                    <div class="tool-title">Gamma</div>
+                </div>
+                <div class="tool-description">
+                    Tu veux créer un support clair, impactant et pro sans passer des heures sur PowerPoint ? Gamma te simplifie la vie. Cette plateforme te permet de générer en un clin d'œil des slides, documents, et même des sites web à partir d'instructions simples.
+                </div>
+                <div class="use-cases">
+                    <h3>💡 Comment l'utiliser concrètement</h3>
+                    <ul>
+                        <li><strong>Présentations express :</strong> crée des slides professionnelles en quelques minutes, prêtes à impressionner ton équipe.</li>
+                        <li><strong>Pitch decks percutants :</strong> prépare ta présentation investisseurs ou clients avec une mise en page soignée et persuasive.</li>
+                        <li><strong>Supports de formation engageants :</strong> conçois du contenu pédagogique vivant, clair et interactif.</li>
+                        <li><strong>Documentation produit fluide :</strong> transforme des infos techniques en guides lisibles et visuellement attractifs.</li>
+                        <li><strong>Landing pages instantanées :</strong> génère ton mini-site "one page" sans coder, pour présenter ton projet ou ton offre dès aujourd'hui.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Google AI Studio -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <div class="tool-logo" style="background: linear-gradient(135deg, #4285f4, #ea4335);">
+                        🔬
+                    </div>
+                    <div class="tool-title">Google AI Studio</div>
+                </div>
+                <div class="tool-description">
+                    La plateforme officielle de Google pour créer, tester et déployer vos propres modèles d'IA générative, y compris Gemini. Idéal pour les développeurs, chercheurs et entreprises voulant personnaliser ou industrialiser l'IA.
+                </div>
+                <div class="use-cases">
+                    <h3>💡 Ce que Google AI Studio permet</h3>
+                    <ul>
+                        <li><strong>Prototyper rapidement</strong> vos propres applications IA à partir des modèles Google (Gemini, Imagen, MusicLM…).</li>
+                        <li><strong>Tester vos prompts,</strong> visualiser et évaluer les réponses en temps réel.</li>
+                        <li><strong>Héberger et déployer</strong> des agents IA personnalisés dans le cloud, avec robustesse et scalabilité.</li>
+                        <li><strong>Accéder à des outils avancés</strong> pour fine-tuner les modèles à vos cas d'usage.</li>
+                        <li><strong>Intégrer l'IA à vos workflows</strong> grâce à de nombreuses options d'API.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Jasper AI -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <div class="tool-logo" style="background: linear-gradient(135deg, #8b5cf6, #6366f1);">
+                        ✍️
+                    </div>
+                    <div class="tool-title">Jasper AI</div>
+                </div>
+                <div class="tool-description">
+                    L'assistant d'écriture nouvelle génération, c'est un vrai partenaire créatif : rapide, intuitif et toujours prêt à te propulser vers le meilleur résultat. Jasper, c'est le coup de pouce digital qui te fait gagner du temps, t'aide à structurer tes idées et t'incite à oser l'originalité, même quand tu démarres !
+                </div>
+                <div class="use-cases">
+                    <h3>💡 Des usages concrets, accessibles à tous</h3>
+                    <ul>
+                        <li><strong>Booster ta rédaction :</strong> Jasper t'aide à transformer une idée en texte accrocheur – que ce soit pour un mail pro, un post inspirant ou une page web dynamique.</li>
+                        <li><strong>Synthétiser et clarifier :</strong> tu as un tas d'informations à traiter ? Jasper les organise et te livre l'essentiel, prêt à l'emploi.</li>
+                        <li><strong>Créer et éditer comme un pro :</strong> structure tes contenus, rédige avec confiance et adapte le ton à ton audience : professionnel, motivant ou même fun !</li>
+                        <li><strong>Trouver l'inspiration :</strong> Besoin d'une accroche, d'un plan ou d'une nouvelle idée ? Jasper te propose des pistes inédites et créatives pour t'aider à avancer.</li>
+                        <li><strong>Communiquer sans stress :</strong> reformule facilement, corrige tes fautes et gagne en fluidité : Jasper veille à ce que ton message soit clair, efficace et percutant.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p><strong>S&C AI Training</strong> - Intelligence augmentée pour professionnels audacieux</p>
+            <p style="margin-top: 15px; font-size: 0.95em; color: #b0b0b0;">
+                Découvrez, explorez, expérimentez
+            </p>
+            <p style="margin-top: 15px; font-size: 1em; color: #4dd0e1;">
+                <a href="mailto:contact@scaitraining.fr" style="color: #4dd0e1; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='#ffffff'" onmouseout="this.style.color='#4dd0e1'">contact@scaitraining.fr</a>
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Force video to play on mobile devices
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.querySelector('.logo-video');
+            
+            if (video) {
+                // Try to play the video
+                const playPromise = video.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        // Video is playing
+                        console.log('Video playing successfully');
+                    }).catch(error => {
+                        // Auto-play was prevented, try to play on user interaction
+                        console.log('Auto-play prevented, will play on interaction');
+                        document.body.addEventListener('click', function playOnClick() {
+                            video.play();
+                            document.body.removeEventListener('click', playOnClick);
+                        }, { once: true });
+                        
+                        document.body.addEventListener('touchstart', function playOnTouch() {
+                            video.play();
+                            document.body.removeEventListener('touchstart', playOnTouch);
+                        }, { once: true });
+                    });
+                }
+            }
+        });
+
+        // Add smooth animations on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all tool cards
+        document.querySelectorAll('.tool-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Add click event for better mobile interaction
+        document.querySelectorAll('.tool-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+            });
+        });
+    </script>
+</body>
+</html>
